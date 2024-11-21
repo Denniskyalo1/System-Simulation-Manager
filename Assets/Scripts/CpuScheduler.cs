@@ -9,18 +9,19 @@ public class CPUScheduler : MonoBehaviour
     public TMP_InputField BurstTimeInput;
     public TMP_Text ResultsText;
 
+
+
     // FCFS Logic
-    // FCFS Logic
-public void SimulateFCFS()
+    public void SimulateFCFS()
 {
     Debug.Log("FCFS button clicked!");
 
-    // Get the user input from the fields
+    // Getting user input
     string processIDs = ProcessIDInput.text;
     string arrivalTimesInput = ArrivalTimeInput.text;
     string burstTimesInput = BurstTimeInput.text;
 
-    // Parse the user input into arrays
+    // Parsing input into arrays
     int[] arrivalTimes = ParseInputToArray(arrivalTimesInput);
     int[] burstTimes = ParseInputToArray(burstTimesInput);
 
@@ -51,11 +52,11 @@ public void SimulateFCFS()
     avgWaitingTime /= n;
     avgTurnaroundTime /= n;
 
-    // Display Results in a cleaner table format
+    // Display results
     string results = "<b>Process</b>\t<b>Waiting Time</b>\t<b>Turnaround Time</b>\n";
     for (int i = 0; i < n; i++)
     {
-        results += $"P{i + 1}\t\t{waitingTimes[i]}\t\t{turnaroundTimes[i]}\n";
+        results += $"P{i + 1}\t\t\t{waitingTimes[i]}\t\t\t{turnaroundTimes[i]}\n";
     }
     results += $"\n<b>Average Waiting Time</b>: {avgWaitingTime:F2}\n<b>Average Turnaround Time</b>: {avgTurnaroundTime:F2}";
     ResultsText.text = results;
@@ -69,11 +70,11 @@ public void SimulateFCFS()
     {
         Debug.Log("SRTF button clicked!");
 
-        // Get the user input from the fields
+        // Getting user input
         string arrivalTimesInput = ArrivalTimeInput.text;
         string burstTimesInput = BurstTimeInput.text;
 
-        // Parse the user input into arrays
+        // Parsing input into arrays
         int[] arrivalTimes = ParseInputToArray(arrivalTimesInput);
         int[] burstTimes = ParseInputToArray(burstTimesInput);
 
@@ -89,7 +90,6 @@ public void SimulateFCFS()
         int currentTime = 0;
         int completedProcesses = 0;
 
-        // SRTF Logic
         while (completedProcesses < n)
         {
             // Find the process with the shortest remaining burst time
@@ -107,7 +107,7 @@ public void SimulateFCFS()
 
             if (processIndex != -1)
             {
-                // Execute the selected process (decrease remaining burst time)
+                // Execute the selected process
                 remainingBurstTimes[processIndex]--;
 
                 // Check if the process is completed
@@ -138,7 +138,7 @@ public void SimulateFCFS()
         avgWaitingTime /= n;
         avgTurnaroundTime /= n;
 
-        // Display Results in a cleaner table format
+        // Display results
         string results = "<b>Process</b>\t<b>Waiting Time</b>\t<b>Turnaround Time</b>\n";
         for (int i = 0; i < n; i++)
         {
@@ -150,7 +150,6 @@ public void SimulateFCFS()
         Debug.Log("SRTF Simulation Complete");
     }
 
-    // Parse input from a comma-separated string to an array of integers
     private int[] ParseInputToArray(string input)
     {
         string[] splitInput = input.Split(',');
